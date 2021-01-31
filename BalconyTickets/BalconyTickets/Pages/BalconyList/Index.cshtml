@@ -1,0 +1,54 @@
+﻿@page
+@model BalconyTickets.Pages.BalconyList.IndexModel
+@{
+    ViewData["Title"] = "Balcony List";
+}
+`
+
+<div class="container row p-0 m-0">
+    <div class="col-10">
+        <h2 class="text-info">Balcony List</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="/BalconyCreate/Index" class="btn btn-info form-control text-white">Add Balcony</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3 table-list">
+        <form method="post">
+            @if (Model.Balconies.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+
+                        <!-- th><label asp-for="Users.FirstOrDefault().user_id"></label></th -->
+                        <!-- th><label>ID</label></th-->
+                        <th><label>NAME</label></th>
+                        <th><label>AVG TIME</label></th>
+                        <th><label>STATUS</label></th>
+                        <th><label>CREATED</label></th>
+                        <th><label>UPDATED</label></th>
+                        <th><label>ACTIONS</label></th>
+                        
+                    </tr>
+                    @foreach (var balcony in Model.Balconies) { 
+                        <tr>
+                            <!-- td>@Html.DisplayFor(m=> balcony.balcony_id)</-->
+                            <td>@Html.DisplayFor(m=> balcony.balcony_name)</td>
+                            <td>@Html.DisplayFor(m=> balcony.balcony_average)</td>
+                            <td>@Html.DisplayFor(m=> balcony.balcony_status)</td>
+                            <td>@Html.DisplayFor(m=> balcony.balcony_created)</td>
+                            <td>@Html.DisplayFor(m=> balcony.balcony_updated)</td>
+                            <td>
+                                <a asp-page="/BalconyEdit/Index" asp-route-id="@balcony.balcony_id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-page="/BalconyDelete/Index" asp-route-id="@balcony.balcony_id" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else {
+                <p>No balconies found.</p>
+            }
+        </form>
+    </div>
+</div>

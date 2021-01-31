@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - BalconyTickets</title>
+
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <link rel="stylesheet" href="~/css/toastr.css" />
+        <link rel="stylesheet" href="~/css/toastr.min.css" />
+
+    </head>
+
+
+
+    <body>
+        <header>
+            
+            <nav id="top" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand logo" asp-area="" asp-page="/Index"><img src="~/img/logo.png" width="60px" />Ticketing Express</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul id="top" class="navbar-nav flex-grow-1 col-sm-6">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/UserList/Index">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/BalconyList/Index">Balconies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/QueueList/Index">Queues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer id="bottom" class="border-top footer text-muted">
+            <div class="container" style="color: white">
+                &copy; 2021 - BalconyTickets - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="~/js/toastr.js"></script>
+        <script src="~/js/toastr.min.js"></script>
+
+        <script>
+            function backToPrevious() {
+                history.go(-1);
+            }
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                var i = -1;
+                var toastCount = 0;
+                var $toastlast;
+
+                var getMessage = function () {
+                    var msgs = ['My name is Fredy Naranjo',
+                        '<div><input class="input-small" value="textbox"/>&nbsp;<a href="http://veritasoft.site" target="_blank">This is a hyperlink</a></div><div><button type="button" id="okBtn" class="btn btn-primary">Close me</button><button type="button" id="surpriseBtn" class="btn" style="margin: 0 8px 0 8px">Surprise me</button></div>',
+                        'Are you the six fingered man?',
+                        'Inconceivable!',
+                        'I do not think that means what you think it means.',
+                        'Have fun storming the castle!'
+                    ];
+                    i++;
+                    if (i === msgs.length) {
+                        i = 0;
+                    }
+
+                    return msgs[i];
+                };
+
+                var getMessageWithClearButton = function (msg) {
+                    msg = msg ? msg : 'Clear itself?';
+                    msg += '<br /><br /><button type="button" class="btn clear">Yes</button>';
+                    return msg;
+                };
+
+                $('#showtoast').click(function () {
+                    //alert('#showtoast');
+
+                    // success, info, warning, error
+                    var shortCutFunction = "warning"; // $("#toastTypeGroup input:radio:checked").val();
+
+                    var msg = "Message"; // $('#message').val();
+                    var title = "Title"; // $('#title').val() || '';
+                    //var $showDuration = 300; // $('#showDuration');
+                    //var $hideDuration = 2000; // $('#hideDuration');
+                    //var $timeOut = 6000; // $('#timeOut');
+                    //var $extendedTimeOut = 1000; // $('#extendedTimeOut');
+                    //var $showEasing = "swing"; // $('#showEasing');
+                    //var $hideEasing = "linear"; // $('#hideEasing');
+                    //var $showMethod = "fadeIn"; // $('#showMethod');
+                    //var $hideMethod = "fadeOut"; // $('#hideMethod');
+                    var toastIndex = toastCount++;
+                    var addClear = true; // $('#addClear').prop('checked');
+
+                    //toastr.options = {
+                    //    closeButton: $('#closeButton').prop('checked'),
+                    //    debug: $('#debugInfo').prop('checked'),
+                    //    newestOnTop: $('#newestOnTop').prop('checked'),
+                    //    progressBar: $('#progressBar').prop('checked'),
+                    //    positionClass: $('#positionGroup input:radio:checked').val() || 'toast-top-right',
+                    //    preventDuplicates: $('#preventDuplicates').prop('checked'),
+                    //    onclick: null
+                    //};
+
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
+                    //if ($('#addBehaviorOnToastClick').prop('checked')) {
+                    //    toastr.options.onclick = function () {
+                    //        alert('You can perform some custom action after a toast goes away');
+                    //    };
+                    //}
+
+                    //if ($showDuration.val().length) {
+                    //    toastr.options.showDuration = $showDuration.val();
+                    //}
+
+                    //if ($hideDuration.val().length) {
+                    //    toastr.options.hideDuration = $hideDuration.val();
+                    //}
+
+                    //if ($timeOut.val().length) {
+                    //    toastr.options.timeOut = addClear ? 0 : $timeOut.val();
+                    //}
+
+                    //if ($extendedTimeOut.val().length) {
+                    //    toastr.options.extendedTimeOut = addClear ? 0 : $extendedTimeOut.val();
+                    //}
+
+                    //if ($showEasing.val().length) {
+                    //    toastr.options.showEasing = $showEasing.val();
+                    //}
+
+                    //if ($hideEasing.val().length) {
+                    //    toastr.options.hideEasing = $hideEasing.val();
+                    //}
+
+                    //if ($showMethod.val().length) {
+                    //    toastr.options.showMethod = $showMethod.val();
+                    //}
+
+                    //if ($hideMethod.val().length) {
+                    //    toastr.options.hideMethod = $hideMethod.val();
+                    //}
+
+                    //if (addClear) {
+                    //    msg = getMessageWithClearButton(msg);
+                    toastr.options.tapToDismiss = false;
+                    //}
+                    //if (!msg) {
+                    //    msg = getMessage();
+                    //}
+
+                    //$('#toastrOptions').text('Command: toastr["'
+                    //    + shortCutFunction
+                    //    + '"]("'
+                    //    + msg
+                    //    + (title ? '", "' + title : '')
+                    //    + '")\n\ntoastr.options = '
+                    //    + JSON.stringify(toastr.options, null, 2)
+                    //);
+
+                    var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+                    $toastlast = $toast;
+
+                    if (typeof $toast === 'undefined') {
+                        return;
+                    }
+
+                    if ($toast.find('#okBtn').length) {
+                        $toast.delegate('#okBtn', 'click', function () {
+                            alert('you clicked me. i was toast #' + toastIndex + '. goodbye!');
+                            $toast.remove();
+                        });
+                    }
+                    if ($toast.find('#surpriseBtn').length) {
+                        $toast.delegate('#surpriseBtn', 'click', function () {
+                            alert('Surprise! you clicked me. i was toast #' + toastIndex + '. You could perform an action here.');
+                        });
+                    }
+                    if ($toast.find('.clear').length) {
+                        $toast.delegate('.clear', 'click', function () {
+                            toastr.clear($toast, { force: true });
+                        });
+                    }
+
+                });
+
+                //function getLastToast() {
+                //    return $toastlast;
+                //}
+                //$('#clearlasttoast').click(function () {
+                //    toastr.clear(getLastToast());
+                //});
+                //$('#cleartoasts').click(function () {
+                //    toastr.clear();
+                //});
+
+
+                var showMessage = function () {
+                    //alert('#showtoast');
+
+                    // success, info, warning, error
+                    var shortCutFunction = "warning"; // $("#toastTypeGroup input:radio:checked").val();
+
+                    var msg = "Message"; // $('#message').val();
+                    var title = "Error"; // $('#title').val() || '';
+
+                    var toastIndex = toastCount++;
+                    var addClear = true; // $('#addClear').prop('checked');
+
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
+                    toastr.options.tapToDismiss = false;
+
+                    var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+                    $toastlast = $toast;
+
+                    if (typeof $toast === 'undefined') {
+                        return;
+                    }
+
+                    if ($toast.find('#okBtn').length) {
+                        $toast.delegate('#okBtn', 'click', function () {
+                            alert('you clicked me. i was toast #' + toastIndex + '. goodbye!');
+                            $toast.remove();
+                        });
+                    }
+                    if ($toast.find('#surpriseBtn').length) {
+                        $toast.delegate('#surpriseBtn', 'click', function () {
+                            alert('Surprise! you clicked me. i was toast #' + toastIndex + '. You could perform an action here.');
+                        });
+                    }
+                    if ($toast.find('.clear').length) {
+                        $toast.delegate('.clear', 'click', function () {
+                            toastr.clear($toast, { force: true });
+                        });
+                    }
+
+                };
+
+            })
+        </script>
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36251023-1']);
+            _gaq.push(['_setDomainName', 'jqueryscript.net']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+
+        @RenderSection("Scripts", required: false)
+
+    </body>
+</html>
+

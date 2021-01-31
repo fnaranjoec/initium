@@ -1,0 +1,54 @@
+﻿@page
+@model BalconyTickets.Pages.UserList.IndexModel
+@{
+    ViewData["Title"] = "User List";
+}
+
+
+<div class="container row p-0 m-0">
+    <div class="col-10">
+        <h2 class="text-info">User List</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="/UserCreate/Index" asp-route-rp="/UserList/Index" class="btn btn-info form-control text-white">Add User</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3 table-list">
+        <form method="post">
+            @if (Model.Users.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+
+                        <!-- th><label asp-for="Users.FirstOrDefault().user_id"></label></th -->
+                        <!-- th><label>ID</label></th-->
+                        <th><label>NAME</label></th>
+                        <th><label>IDENTIFICATION</label></th>
+                        <th><label>STATUS</label></th>
+                        <th><label>CREATED</label></th>
+                        <th><label>UPDATED</label></th>
+                        <th><label>ACTIONS</label></th>
+                        
+                    </tr>
+                    @foreach (var user in Model.Users) { 
+                        <tr>
+                            <!-- td>@Html.DisplayFor(m=>user.user_id)</-->
+                            <td>@Html.DisplayFor(m=>user.user_name)</td>
+                            <td>@Html.DisplayFor(m=>user.user_identification)</td>
+                            <td>@Html.DisplayFor(m=>user.user_status)</td>
+                            <td>@Html.DisplayFor(m=>user.user_created)</td>
+                            <td>@Html.DisplayFor(m=>user.user_updated)</td>
+                            <td>
+                                <a asp-page="/UserEdit/Index" asp-route-id="@user.user_id" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-page="/UserDelete/Index" asp-route-id="@user.user_id" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else {
+                <p>No users found.</p>
+            }
+        </form>
+    </div>
+</div>

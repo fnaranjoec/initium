@@ -1,0 +1,58 @@
+﻿@page
+@model BalconyTickets.Pages.QueueList.IndexModel
+@{
+    ViewData["Title"] = "Queue List";
+}
+
+@functions
+        {
+    public void ShowMessage()
+    {
+        string output = "Hello";
+        ViewBag.Message(output);
+    }
+}
+
+<div class="container row p-0 m-0">
+    <div class="col-10">
+        <h2 class="text-info">Queue List</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="/UserCreate/Index" asp-route-rp="/QueueList/Index" class="btn btn-info form-control text-white">Add User</a>
+    </div>
+
+    <div class="col-12 border p-3 mt-3 table-list">
+        <form method="post" style="opacity:1">
+            @if (Model.Queues.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th><label>YOUR NAME</label></th>
+                        <th><label>BALCONY NAME</label></th>
+                        <th><label>YOUR NUMBER</label></th>
+                        <th><label>SERVE TIME (minutes)</label></th>
+                        <th><label>ACTIONS</label></th>
+
+                    </tr>
+                    @foreach (var queue in Model.Queues)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => queue.user_name)</td>
+                            <td>@Html.DisplayFor(m => queue.balcony_name)</td>
+                            <td>@Html.DisplayFor(m => queue.queue_pos)</td>
+                            <td>@Html.DisplayFor(m => queue.avg_time)</td>
+                            <td>
+                                <button type="submit" class="btn btn-danger btn-sm" asp-page-handler="delete" asp-route-id="@queue.queue_id">Attended</button>
+                                
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No queues found.</p>
+            }
+        </form>
+    </div>
+</div>

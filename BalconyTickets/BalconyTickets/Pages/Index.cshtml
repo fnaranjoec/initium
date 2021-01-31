@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Ticket Web App Home page";
+}
+
+<div class="text-center" style="padding: 30px">
+    <h1 class="display-4">Welcome to Ticketing Express !!! </h1>
+    
+
+    <div class="border container" style="padding: 30px; margin:30px">
+        <p>In order to take a place on the most faster line, plase click on the below button.</p><br />
+        <img src="~/img/TakeTicket.png" />
+        <a asp-page="/UserCreate/Index" asp-route-rp="/Index" class="btn btn-info form-control text-white col-sm-2">Take a ticket</a>
+    </div>
+</div>
